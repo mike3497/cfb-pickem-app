@@ -39,6 +39,8 @@ import { object, string } from 'yup';
 import type { SignUpDto } from '@/models/auth/signUpDto';
 import { AuthService } from '@/services/authService';
 import { ref } from 'vue';
+import { useAuthStore } from '@/stores/authStore';
+import { useRouter } from 'vue-router';
 
 const usernameRegex = /^[a-zA-Z][a-zA-Z0-9_]{2,19}$/;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]{8,}$/;
@@ -49,6 +51,9 @@ const validationSchema = object({
   username: string().label('Username').required().matches(usernameRegex, 'Username is not valid'),
   password: string().label('Password').required().matches(passwordRegex, 'Password is not valid')
 });
+
+const authStore = useAuthStore();
+const router = useRouter();
 
 const errorMessage = ref<string>('');
 const isLoading = ref<boolean>(false);
@@ -64,7 +69,12 @@ const onFormSubmitted = async (values: any) => {
   try {
     errorMessage.value = '';
     isLoading.value = true;
-    await AuthService.signUp(signUpDto);
+
+    const response = await AuthService.signUp(signUpDto);
+    authStore.accessToken = response.accessToken;
+    authStore.user = response.user;
+
+    router.push('/');
   } catch (error: any) {
     errorMessage.value = error.response.data.message;
   } finally {

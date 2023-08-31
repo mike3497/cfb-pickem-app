@@ -31,11 +31,16 @@ import { object, string } from 'yup';
 import { AuthService } from '@/services/authService';
 import { ref } from 'vue';
 import type { SignInDto } from '@/models/auth/signInDto';
+import { useAuthStore } from '@/stores/authStore';
+import { useRouter } from 'vue-router';
 
 const validationSchema = object({
   username: string().label('Username').required(),
   password: string().label('Password').required()
 });
+
+const authStore = useAuthStore();
+const router = useRouter();
 
 const errorMessage = ref<string>('');
 const isLoading = ref<boolean>(false);
@@ -49,7 +54,12 @@ const onFormSubmitted = async (values: any) => {
   try {
     errorMessage.value = '';
     isLoading.value = true;
-    await AuthService.signIn(signInDto);
+
+    const response = await AuthService.signIn(signInDto);
+    authStore.accessToken = response.accessToken;
+    authStore.user = response.user;
+
+    router.push('/');
   } catch (error: any) {
     errorMessage.value = error.response.data.message;
   } finally {
