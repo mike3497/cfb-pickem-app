@@ -1,6 +1,6 @@
 <template>
   <tr :class="rowClass">
-    <td>{{ game.date }}</td>
+    <td>{{ formattedDate }}</td>
     <td>
       <label class="label cursor-pointer">
         <span class="label-text" :class="{ 'font-bold': game.homeTeamId === game.winningTeamId }">
@@ -41,6 +41,7 @@ import type { Game } from '@/models/game';
 import type { Pick } from '@/models/pick';
 import { PickService } from '@/services/pickService';
 import { ref, type PropType, onMounted, watch, computed } from 'vue';
+import dayjs from 'dayjs';
 
 const props = defineProps({
   game: {
@@ -68,6 +69,8 @@ const rowClass = computed<string>(() => {
 
   return '';
 });
+
+const formattedDate = computed<string>(() => dayjs(props.game.date).format('MM/DD/YYYY h:mmA'));
 
 const isDisabled = computed<boolean>(() => {
   const currentTime: Date = new Date();
