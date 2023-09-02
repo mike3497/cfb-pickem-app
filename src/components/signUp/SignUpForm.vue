@@ -22,6 +22,14 @@
     <div>
       <FormInput label="Password" name="password" type="password" :disabled="isLoading" />
     </div>
+    <div>
+      <FormInput
+        label="Confirm Password"
+        name="confirmPassword"
+        type="password"
+        :disabled="isLoading"
+      />
+    </div>
     <button class="btn btn-primary" :disabled="isLoading">Sign Up</button>
   </Form>
   <div>
@@ -35,7 +43,7 @@
 <script setup lang="ts">
 import { Form } from 'vee-validate';
 import FormInput from '@/components/shared/FormInput.vue';
-import { object, string } from 'yup';
+import { object, string, ref as yupRef } from 'yup';
 import type { SignUpDto } from '@/models/auth/signUpDto';
 import { AuthService } from '@/services/authService';
 import { ref } from 'vue';
@@ -49,7 +57,17 @@ const validationSchema = object({
   firstName: string().label('First Name').required(),
   lastName: string().label('Last Name').required(),
   username: string().label('Username').required().matches(usernameRegex, 'Username is not valid'),
-  password: string().label('Password').required().matches(passwordRegex, 'Password is not valid')
+  password: string()
+    .label('Password')
+    .required()
+    .matches(
+      passwordRegex,
+      'Password must be at least 8 characters, contain at least 1 uppercase and 1 lowercase letter, contain at least 1 digit, and contain at least 1 special character.'
+    ),
+  confirmPassword: string()
+    .label('Confirm Password')
+    .required()
+    .oneOf([yupRef('password')], 'Passwords must match')
 });
 
 const authStore = useAuthStore();
