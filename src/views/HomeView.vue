@@ -8,18 +8,13 @@
         <LeaderboardTable />
       </div>
     </div>
-    <div class="card card-bordered">
-      <div class="card-body">
-        <h2 class="card-title">Games</h2>
-        <GamesTable />
-      </div>
-    </div>
+    <GamesCard />
   </div>
   <SiteFooter />
 </template>
 
 <script setup lang="ts">
-import GamesTable from '@/components/GamesTable.vue';
+import GamesCard from '@/components/home/GamesCard.vue';
 import LeaderboardTable from '@/components/LeaderboardTable.vue';
 import { useAuthStore } from '@/stores/authStore';
 import SiteHeader from '@/components/layout/SiteHeader.vue';
