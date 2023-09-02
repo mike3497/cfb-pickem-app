@@ -1,25 +1,27 @@
 <template>
-  <div v-if="isLoading" class="text-center">
-    <span class="loading loading-spinner loading-lg align-top py-16"></span>
+  <div class="overflow-x-auto">
+    <div v-if="isLoading" class="text-center">
+      <span class="loading loading-spinner loading-lg align-top py-16"></span>
+    </div>
+    <table v-else class="table w-full">
+      <thead>
+        <tr>
+          <th>Ranking</th>
+          <th>Name</th>
+          <th>Correct Picks</th>
+          <th>Correct %</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="leaderboardRow in leaderboardRows" :key="leaderboardRow.user.id">
+          <td>{{ leaderboardRow.ranking }}</td>
+          <td>{{ leaderboardRow.user.firstName }} {{ leaderboardRow.user.lastName }}</td>
+          <td>{{ leaderboardRow.correctPicks }}</td>
+          <td>{{ leaderboardRow.correctPicksPercentage }}%</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <table v-else class="table">
-    <thead>
-      <tr>
-        <th>Ranking</th>
-        <th>Name</th>
-        <th>Correct Picks</th>
-        <th>Correct %</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="leaderboardRow in leaderboardRows" :key="leaderboardRow.user.id">
-        <td>{{ leaderboardRow.ranking }}</td>
-        <td>{{ leaderboardRow.user.firstName }} {{ leaderboardRow.user.lastName }}</td>
-        <td>{{ leaderboardRow.correctPicks }}</td>
-        <td>{{ leaderboardRow.correctPicksPercentage }}%</td>
-      </tr>
-    </tbody>
-  </table>
 </template>
 
 <script setup lang="ts">
