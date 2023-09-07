@@ -24,7 +24,7 @@
             </RouterLink>
           </td>
           <td>{{ leaderboardRow.correctPicks }}</td>
-          <td>{{ leaderboardRow.correctPicksPercentage }}%</td>
+          <td>{{ FormatHelper.formatAsPercentage(leaderboardRow.correctPicksPercentage) }}</td>
         </tr>
       </tbody>
     </table>
@@ -35,6 +35,7 @@
 import type { Leaderboard } from '@/models/leaderboard';
 import { LeaderboardService } from '@/services/leaderboardService';
 import { onMounted, ref } from 'vue';
+import { FormatHelper } from '@/helpers/formatHelper';
 
 const isLoading = ref<boolean>(false);
 const leaderboardRows = ref<Leaderboard[]>([]);
