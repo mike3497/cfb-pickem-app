@@ -3,9 +3,12 @@
     <td>{{ formattedDate }}</td>
     <td>
       <label class="label cursor-pointer">
-        <span class="label-text" :class="{ 'font-bold': game.homeTeamId === game.winningTeamId }">
-          {{ game.homeTeam }} {{ game.homeTeamScore }}
-        </span>
+        <div>
+          <span v-if="game.homeTeamRank" class="mr-2">{{ game.homeTeamRank }}</span>
+          <span class="label-text" :class="{ 'font-bold': game.homeTeamId === game.winningTeamId }">
+            {{ game.homeTeam }} {{ game.homeTeamScore }}
+          </span>
+        </div>
         <input
           v-model="model"
           class="radio"
@@ -19,9 +22,12 @@
     </td>
     <td>
       <label class="label cursor-pointer">
-        <span class="label-text" :class="{ 'font-bold': game.awayTeamId === game.winningTeamId }">
-          {{ game.awayTeam }} {{ game.awayTeamScore }}
-        </span>
+        <div>
+          <span v-if="game.awayTeamRank" class="mr-2">{{ game.awayTeamRank }}</span>
+          <span class="label-text" :class="{ 'font-bold': game.awayTeamId === game.winningTeamId }">
+            {{ game.awayTeam }} {{ game.awayTeamScore }}
+          </span>
+        </div>
         <input
           v-model="model"
           class="radio"

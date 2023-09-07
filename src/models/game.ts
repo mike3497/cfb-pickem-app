@@ -1,14 +1,16 @@
 export interface Game {
   awayTeam: string;
   awayTeamId: number;
-  awayTeamScore?: number | null;
+  awayTeamRank: number | null;
+  awayTeamScore: number | null;
   date: Date;
   homeTeam: string;
   homeTeamId: number;
-  homeTeamScore?: number | null;
+  homeTeamRank: number | null;
+  homeTeamScore: number | null;
   id: number;
   season: number;
   week: number;
-  winningTeam?: string | null;
-  winningTeamId?: number | null;
+  winningTeam: string | null;
+  winningTeamId: number | null;
 }
