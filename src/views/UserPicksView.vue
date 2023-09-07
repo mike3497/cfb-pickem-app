@@ -1,6 +1,12 @@
 <template>
   <SiteHeader />
   <div class="container mx-auto px-4">
+    <div class="text-sm breadcrumbs">
+      <ul>
+        <li><RouterLink :to="{ name: 'home' }">Home</RouterLink></li>
+        <li>Picks</li>
+      </ul>
+    </div>
     <h1 v-if="user" class="text-4xl font-bold my-8">
       {{ user.firstName }} {{ user.lastName }}'s Picks
     </h1>
