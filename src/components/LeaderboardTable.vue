@@ -15,7 +15,14 @@
       <tbody>
         <tr v-for="leaderboardRow in leaderboardRows" :key="leaderboardRow.user.id">
           <td>{{ leaderboardRow.ranking }}</td>
-          <td>{{ leaderboardRow.user.firstName }} {{ leaderboardRow.user.lastName }}</td>
+          <td>
+            <RouterLink
+              class="link"
+              :to="{ name: 'user-picks', params: { id: leaderboardRow.user.id } }"
+            >
+              {{ leaderboardRow.user.firstName }} {{ leaderboardRow.user.lastName }}
+            </RouterLink>
+          </td>
           <td>{{ leaderboardRow.correctPicks }}</td>
           <td>{{ leaderboardRow.correctPicksPercentage }}%</td>
         </tr>

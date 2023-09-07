@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue';
 import SignInView from '@/views/SignInView.vue';
 import SignUpView from '@/views/SignUpView.vue';
 import NotFoundView from '@/views/NotFoundView.vue';
+import UserPicksView from '@/views/UserPicksView.vue';
 import authMiddleware from '@/middleware/authMiddleware';
 
 const router = createRouter({
@@ -23,6 +24,11 @@ const router = createRouter({
       path: '/sign-in',
       name: 'sign-in',
       component: SignInView
+    },
+    {
+      path: '/picks/:id',
+      name: 'user-picks',
+      component: UserPicksView
     },
     {
       path: '/:pathMatch(.*)*',
