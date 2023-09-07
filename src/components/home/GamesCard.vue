@@ -6,19 +6,9 @@
         <div class="flex gap-2">
           <label class="label">Week</label>
           <select v-model="week" class="select select-bordered w-32">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
+            <option v-for="weekOption in weekOptions" :key="weekOption.week">
+              {{ weekOption.week }}
+            </option>
           </select>
         </div>
       </div>
@@ -39,13 +29,16 @@ import { GameService } from '@/services/gameService';
 import { PickService } from '@/services/pickService';
 import { useAuthStore } from '@/stores/authStore';
 import { ref, onMounted, watch } from 'vue';
+import { WeeksHelper } from '@/helpers/weeksHelper';
+
+const weekOptions = WeeksHelper.getWeeks();
 
 const authStore = useAuthStore();
 
 const isLoading = ref<boolean>(false);
 const games = ref<Game[]>([]);
 const picks = ref<Pick[]>([]);
-const week = ref<number>(1);
+const week = ref<number>(WeeksHelper.getCurrentWeek());
 
 const fetchGames = async () => {
   try {
