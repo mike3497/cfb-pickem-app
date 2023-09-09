@@ -3,7 +3,7 @@
     <div v-if="isLoading" class="text-center">
       <span class="loading loading-spinner loading-lg align-top py-16"></span>
     </div>
-    <table v-else class="table w-full">
+    <table v-else class="table table-sm w-full">
       <thead>
         <tr>
           <th>Ranking</th>

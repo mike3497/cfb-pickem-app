@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-x-auto">
-    <table class="table w-full">
+    <table class="table table-sm w-full">
       <thead>
         <tr>
           <th>Date</th>

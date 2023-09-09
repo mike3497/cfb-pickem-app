@@ -11,7 +11,7 @@
         </div>
         <input
           v-model="model"
-          class="radio"
+          class="radio radio-sm"
           type="radio"
           :disabled="true"
           :name="`game-radio-${game.id}`"
@@ -29,7 +29,7 @@
         </div>
         <input
           v-model="model"
-          class="radio"
+          class="radio radio-sm"
           type="radio"
           :disabled="true"
           :name="`game-radio-${game.id}`"
