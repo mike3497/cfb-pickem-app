@@ -5,6 +5,7 @@ import SignUpView from '@/views/SignUpView.vue';
 import NotFoundView from '@/views/NotFoundView.vue';
 import UserPicksView from '@/views/UserPicksView.vue';
 import authMiddleware from '@/middleware/authMiddleware';
+import AdminView from '@/views/AdminView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,11 @@ const router = createRouter({
       path: '/picks/:id',
       name: 'user-picks',
       component: UserPicksView
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminView
     },
     {
       path: '/:pathMatch(.*)*',
