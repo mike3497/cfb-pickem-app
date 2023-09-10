@@ -29,12 +29,14 @@ const router = createRouter({
     {
       path: '/picks/:id',
       name: 'user-picks',
-      component: UserPicksView
+      component: UserPicksView,
+      beforeEnter: authMiddleware
     },
     {
       path: '/admin',
       name: 'admin',
-      component: AdminView
+      component: AdminView,
+      beforeEnter: authMiddleware
     },
     {
       path: '/:pathMatch(.*)*',
